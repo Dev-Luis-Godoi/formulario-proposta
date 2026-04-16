@@ -7,19 +7,24 @@ type Props = {
 
 const OptionsMonthly = ({ value, onChange }: Props) => {
   const handleToggle = (key: keyof OptionalMonthly) => {
-    onChange({
-      ...value,
-      [key]: !value[key],
-    });
+    if (typeof value[key] === 'boolean') {
+      onChange({
+        ...value,
+        [key]: !value[key],
+      });
+    }
   };
 
-  const options = [
+  const options: {
+    key: keyof Omit<OptionalMonthly, 'cnpjQuantity' | 'comprovacoes'>;
+    label: string;
+  }[] = [
     { key: 'xmlCollector', label: 'Sistema coletor de XML' },
-    { key: 'erpIntegration', label: 'Integração com ERP' },
+    { key: 'erpIntegrationAccessAccess', label: 'Integração com ERP' },
     { key: 'apiIntegrationAccess', label: 'Acesso à API' },
     { key: 'occurrencesModule', label: 'Módulo de ocorrências' },
     { key: 'antifraudeModule', label: 'Módulo antifraude' },
-  ] as const;
+  ];
   return (
     <div>
       <h3 className="mb-4 font-semibold text-white">Itens mensais</h3>
@@ -29,18 +34,30 @@ const OptionsMonthly = ({ value, onChange }: Props) => {
           Quantidade CNPJ
           <input
             type="number"
-            placeholder="Quantidade CNPJ... "
-            defaultValue={1}
-            className="hover:bg-gray-700 bg-gray-800 border border-gray-600 rounded-md p-1"
+            min={1}
+            value={value.cnpjQuantity}
+            onChange={(e) =>
+              onChange({
+                ...value,
+                cnpjQuantity: Number(e.target.value),
+              })
+            }
+            className="bg-gray-800 border border-gray-600 rounded-md p-1 ml-3 w-16"
           />
         </div>
         <div className=" px-3 py-2 border-b border-gray-600 flex items-center justify-between text-white">
           Quantidade de Comprovações
           <input
             type="number"
-            placeholder="Comprovações... "
-            defaultValue={1000}
-            className="hover:bg-gray-700 bg-gray-800 border border-gray-600 rounded-md p-1"
+            min={1}
+            value={value.comprovacoes}
+            onChange={(e) =>
+              onChange({
+                ...value,
+                comprovacoes: Number(e.target.value),
+              })
+            }
+            className="hover:bg-gray-700 bg-gray-800 border border-gray-600 rounded-md p-1 ml-3 w-20"
           />
         </div>
         {options.map((option, index) => (
