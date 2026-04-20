@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Document, Page, Text, View } from '@react-pdf/renderer';
+import Header from './components/Header';
+import ChallengesSolutions from './components/ChallengesSolutions';
+import Pricing from './components/Pricing';
 
 type Props = {
   data: any;
@@ -11,13 +14,17 @@ const ProposalPDF = ({ data, price }: Props) => {
     <Document>
       <Page>
         <View>
-          <Text>Empresa: {data.company.name}</Text>
-          <Text>CNPJ: {data.company.cnpj}</Text>
-          <Text>Solicitante: {data.company.requester}</Text>
-
+          <Header company={data.company} expirationDays={data.proposal.expirationDays} />
           <Text>--------------------</Text>
-
-          <Text>Total: R$ {price.total}</Text>
+        </View>
+        <View>
+          <ChallengesSolutions
+            challenges={data.proposal.challenges}
+            solutions={data.proposal.solutions}
+          />
+        </View>
+        <View>
+          <Pricing price={price} />
         </View>
       </Page>
     </Document>

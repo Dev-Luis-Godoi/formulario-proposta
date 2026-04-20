@@ -9,7 +9,7 @@ type Props = {
 
 const Costs = ({ price }: Props) => {
   return (
-    <div className="bg-gray-900 p-4 rounded-lg text-white">
+    <div className=" p-4 rounded-lg ">
       <h3 className="text-lg font-semibold mb-3">Resumo de Custos</h3>
 
       <div className="flex justify-between">

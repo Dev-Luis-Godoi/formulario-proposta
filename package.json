@@ -15,6 +15,7 @@
     "@react-pdf/renderer": "^4.4.1",
     "@tailwindcss/vite": "^4.2.2",
     "autoprefixer": "^10.4.27",
+    "lucide-react": "^1.8.0",
     "postcss": "^8.5.8",
     "prettier": "^3.8.1",
     "react": "^19.2.4",

@@ -1,66 +1,76 @@
 import React, { useState } from 'react';
-import type { ExpirationDate } from '../types/ExpirationDate';
 
 type Props = {
-  value: ExpirationDate['days'] | null;
-  onChange: (value: number | null) => void;
+  value: string | null;
+  onChange: (value: string | null) => void;
 };
 
+type OptionType = '30' | '60' | '90' | 'custom';
+
 const ExpirationsDate = ({ value, onChange }: Props) => {
-  const isCustom = value !== null && value !== 30;
+  const [selected, setSelected] = useState<OptionType>('30');
 
-  const [mode, setMode] = useState<'default' | 'custom'>(isCustom ? 'custom' : 'default');
+  const addDays = (days: number) => {
+    const date = new Date();
+    date.setDate(date.getDate() + days);
+    return date.toISOString().split('T')[0];
+  };
 
-  const [customValue, setCustomValue] = useState(isCustom ? String(value) : '');
+  const handleButtonClick = (val: OptionType) => {
+    setSelected(val);
 
-  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const val = e.target.value;
-
-    if (val === '30') {
-      setMode('default');
-      onChange(30);
-    } else {
-      setMode('custom');
-      onChange(null);
+    if (val !== 'custom') {
+      const futureDate = addDays(Number(val));
+      onChange(futureDate);
     }
   };
 
-  const handleCustomChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.value;
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSelected('custom');
+    onChange(e.target.value);
+  };
 
-    if (!/^\d*$/.test(val)) return;
-
-    setCustomValue(val);
-
-    if (val === '') {
-      onChange(null);
-    } else {
-      onChange(Number(val));
-    }
+  const getButtonClass = (val: OptionType) => {
+    const isActive = selected === val;
+    return `px-5 py-2 rounded-2xl text-sm font-medium transition-colors ${
+      isActive ? 'bg-emerald-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+    }`;
   };
 
   return (
-    <div className="flex flex-col p-2 gap-2 bg-[#4682B4]">
-      <label className="text-white ">Validade da proposta:</label>
+    <div className="flex flex-col gap-3 w-full">
+      <label className="text-sm font-medium text-gray-700">Validade da proposta:</label>
 
-      <select
-        value={mode === 'default' ? '30' : 'custom'}
-        onChange={handleSelectChange}
-        className="px-3 py-2 rounded-md border bg-[#4682B4]"
-      >
-        <option value="30">30 dias (padrão)</option>
-        <option value="custom">Outro valor</option>
-      </select>
+      <div className="flex flex-wrap gap-2">
+        <button
+          type="button"
+          onClick={() => handleButtonClick('30')}
+          className={getButtonClass('30')}
+        >
+          30 dias
+        </button>
+        <button
+          type="button"
+          onClick={() => handleButtonClick('60')}
+          className={getButtonClass('60')}
+        >
+          60 dias
+        </button>
+        <button
+          type="button"
+          onClick={() => handleButtonClick('90')}
+          className={getButtonClass('90')}
+        >
+          90 dias
+        </button>
+      </div>
 
-      {mode === 'custom' && (
-        <input
-          type="text"
-          placeholder="Digite a quantidade de dias"
-          value={customValue}
-          onChange={handleCustomChange}
-          className="px-3 py-2 rounded-md border outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      )}
+      <input
+        type="date"
+        value={value ?? ''}
+        onChange={handleDateChange}
+        className="w-full h-10 px-3 mt-1 border-radius-12 rounded-md border border-emerald-300 focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 "
+      />
     </div>
   );
 };

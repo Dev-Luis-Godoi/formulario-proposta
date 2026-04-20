@@ -1,4 +1,6 @@
-.counter {
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+.counter:hover:focus-visible {
   font-size: 16px;
   padding: 5px 10px;
   border-radius: 5px;
@@ -8,13 +10,10 @@
   transition: border-color 0.3s;
   margin-bottom: 24px;
 
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+  border-color: var(--accent-border);
+
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 #center {
@@ -142,4 +141,25 @@
     right: 0;
     border-right-color: var(--border);
   }
+}
+
+.font-inter-h1 {
+  font-family: 'Inter', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.font-inter-p {
+  font-family: 'Inter', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.font-inter-options {
+  font-family: 'Inter', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }

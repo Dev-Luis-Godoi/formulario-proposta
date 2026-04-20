@@ -27,10 +27,10 @@ const OptionsMonthly = ({ value, onChange }: Props) => {
   ];
   return (
     <div>
-      <h3 className="mb-4 font-semibold text-white">Itens mensais</h3>
+      <h3 className="mb-4 font-semibold ">Itens mensais</h3>
 
-      <ul className=" text-sm bg-gray-800 border border-gray-600 rounded-lg">
-        <div className="w-full px-3 py-2 border-b border-gray-600 flex items-center justify-between text-white ">
+      <ul className=" text-sm  border rounded-lg">
+        <div className="w-full px-3 py-2 border-b  flex items-center justify-between  ">
           Quantidade CNPJ
           <input
             type="number"
@@ -42,10 +42,10 @@ const OptionsMonthly = ({ value, onChange }: Props) => {
                 cnpjQuantity: Number(e.target.value),
               })
             }
-            className="bg-gray-800 border border-gray-600 rounded-md p-1 ml-3 w-16"
+            className=" border border-gray-600 rounded-md p-1 ml-3 w-16"
           />
         </div>
-        <div className=" px-3 py-2 border-b border-gray-600 flex items-center justify-between text-white">
+        <div className=" px-3 py-2 border-b border-gray-600 flex items-center justify-between ">
           Quantidade de Comprovações
           <input
             type="number"
@@ -57,7 +57,7 @@ const OptionsMonthly = ({ value, onChange }: Props) => {
                 comprovacoes: Number(e.target.value),
               })
             }
-            className="hover:bg-gray-700 bg-gray-800 border border-gray-600 rounded-md p-1 ml-3 w-20"
+            className=" border border-gray-600 rounded-md p-1 ml-3 w-20"
           />
         </div>
         {options.map((option, index) => (
@@ -75,7 +75,7 @@ const OptionsMonthly = ({ value, onChange }: Props) => {
               className="w-4 h-4 border border-gray-400 rounded bg-gray-700 focus:ring-2 focus:ring-blue-500"
             />
 
-            <label htmlFor={option.key} className="w-full py-3 ml-2 cursor-pointer text-white">
+            <label htmlFor={option.key} className="w-full py-3 ml-2 cursor-pointer ">
               {option.label}
             </label>
           </li>

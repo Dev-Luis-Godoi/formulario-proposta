@@ -1,29 +1,61 @@
-import Form from './forms/Form';
+import { useState } from 'react';
+import FormChallengesSolutions from './forms/FormChallengesSolutions';
+import FormCompany from './forms/FormCompany';
+import FormPrice from './forms/FormPrice';
 import Header from './forms/Header';
+import type { OptionalMonthly } from './types/optionalMonthly';
+import type { ImplementationCost } from './types/ImplementationCost';
 
 function App() {
+  const [options, setOptions] = useState<OptionalMonthly>({
+    xmlCollector: false,
+    erpIntegrationAccessAccess: false,
+    apiIntegrationAccess: false,
+    occurrencesModule: false,
+    antifraudeModule: false,
+    cnpjQuantity: 1,
+    comprovacoes: 1000,
+  });
+
+  const [implementation, setImplementation] = useState<ImplementationCost>({
+    tutorialTraining: false,
+    consultantTraining: false,
+    custom: false,
+    customDescription: '',
+    none: false,
+  });
+
   return (
-    <div
-      className="min-h-screen w-full bg-cover bg-center flex flex-col"
-      style={{
-        backgroundImage: "url('/src/assets/logistica-internacional.1.14.jpg')",
-      }}
-    >
-      <div className="min-h-screen w-full bg-black/40 flex flex-col">
-        <Header />
+    <div className="min-h-screen w-full flex flex-col bg-[#eeeeee]">
+      <Header />
 
-        <main className="flex-1 flex items-center justify-center p-4 pt-20 ">
-          <div className="bg-[#4682B4] text-white w-full max-w-5xl rounded-xl p-6 shadow-lg flex flex-col justify-center items-center mt-10">
-            <h1 className="font-black text-2xl mb-2">Formulário Proposta</h1>
+      <div className="pt-24 pb-12">
+        <div className="max-w-7xl mx-auto px-12">
+          <h1 className="text-[24px] font-semibold mb-6">Nova Proposta</h1>
 
-            <p className="font-semibold italic mb-4">Preencha com os dados da empresa:</p>
+          <div className="grid grid-cols-12 gap-6">
+            <div className="col-span-8 flex flex-col gap-6">
+              <FormCompany />
 
-            <Form />
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                <FormChallengesSolutions />
+              </div>
+            </div>
+
+            <div className="col-span-4">
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 sticky top-24">
+                <FormPrice
+                  options={options}
+                  setOptions={setOptions}
+                  implementation={implementation}
+                  setImplementation={setImplementation}
+                />
+              </div>
+            </div>
           </div>
-        </main>
+        </div>
       </div>
     </div>
   );
 }
-
 export default App;

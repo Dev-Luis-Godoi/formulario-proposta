@@ -7,14 +7,14 @@ type Props = {
 
 const RequestersName = ({ value, onChange }: Props) => {
   return (
-    <div>
-      <label className="text-white flex">Nome do Solicitante:</label>
+    <div className="flex flex-col gap-1 w-full">
+      <label className="text-sm text-gray-600">Nome do Solicitante:</label>
       <input
         type="text"
         placeholder="Digite nome do solicitante"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="px-3 py-2 rounded-md border outline-none"
+        className="w-full h-10 px-3 rounded-md border border-gray-300 outline-none focus:ring-2 focus:ring-green-500"
       />
     </div>
   );

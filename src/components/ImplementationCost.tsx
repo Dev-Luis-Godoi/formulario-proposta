@@ -38,9 +38,9 @@ const ImplementationCosts = ({ value, onChange }: Props) => {
 
   return (
     <div>
-      <h3 className="mb-4 font-semibold text-white">Itens de implementação</h3>
+      <h3 className="mb-4 font-semibold ">Itens de implementação</h3>
 
-      <ul className="w-full text-sm bg-gray-800 border border-gray-600 rounded-lg">
+      <ul className="w-full text-sm  border border-gray-600 rounded-lg">
         {options.map((option, index) => (
           <li
             key={option.key}
@@ -55,10 +55,10 @@ const ImplementationCosts = ({ value, onChange }: Props) => {
                 checked={value[option.key]}
                 onChange={() => handleDisabled(option.key)}
                 disabled={value.none && option.key !== 'none'}
-                className="w-4 h-4 border border-gray-400 rounded bg-gray-700 focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+                className="w-4 h-4 border border-gray-400 rounded  focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
               />
 
-              <label htmlFor={option.key} className="w-full py-3 ml-2 cursor-pointer text-white">
+              <label htmlFor={option.key} className="w-full py-3 ml-2 cursor-pointer ">
                 {option.label}
               </label>
             </div>
