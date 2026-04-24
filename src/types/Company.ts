@@ -1,4 +1,5 @@
 export type Company = {
-    name: string;
-    cnpj: string;
-}
+  name: string;
+  cnpj: string;
+  requester: string;
+};

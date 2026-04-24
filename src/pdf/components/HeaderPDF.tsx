@@ -6,7 +6,7 @@ type Props = {
     cnpj: string;
     requester: string;
   };
-  expirationDays: number;
+  expirationDays: string | null;
 };
 
 const Header = ({ company, expirationDays }: Props) => {
@@ -16,7 +16,7 @@ const Header = ({ company, expirationDays }: Props) => {
       <Text>CNPJ: {company.cnpj}</Text>
       <Text>Solicitante: {company.requester}</Text>
 
-      <Text>Validade da proposta: {expirationDays} dias</Text>
+      <Text>Validade da proposta: {expirationDays}</Text>
     </View>
   );
 };

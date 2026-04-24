@@ -1,4 +1,6 @@
-export const PRICING = {
+import type { PricingType } from '../types/Pricing';
+
+export const INITIAL_PRICING: PricingType = {
   monthly: {
     xmlCollector: 50,
     erpIntegrationAccess: 100,
@@ -6,21 +8,14 @@ export const PRICING = {
     occurrencesModule: 40,
     antifraudeModule: 120,
   },
-
   implementation: {
     tutorialTraining: 200,
     consultantTraining: 500,
     custom: 0,
   },
-
-  cnpj: [
-    { max: 1, price: 100 },
-    { max: 3, price: 250 },
-    { max: 10, price: 600 },
-  ],
-  comprovacoes: [
-    { max: 1000, price: 0 },
-    { max: 3000, price: 50 },
-    { max: 10000, price: 100 },
-  ],
+  planBasic: {
+    cnpjQuantity: 0,
+    comprovationsQuantity: 0,
+    total: 0,
+  },
 };
