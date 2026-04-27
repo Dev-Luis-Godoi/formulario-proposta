@@ -1,4 +1,5 @@
 import { View, Text } from '@react-pdf/renderer';
+import { styles } from '../styles';
 
 type Props = {
   challenges: string[];
@@ -7,23 +8,23 @@ type Props = {
 
 const ChallengesSolutions = ({ challenges, solutions }: Props) => {
   return (
-    <View>
-      <Text>Desafios</Text>
+    <View style={[{ flexDirection: 'row', gap: 16 }]}>
+      <View style={[{ flex: 1 }]}>
+        <Text style={styles.title}>Desafios</Text>
+        {challenges.map((item, i) => (
+          <Text key={i} style={[{ fontSize: 10, marginBottom: 4 }]}>
+            • {item}
+          </Text>
+        ))}
+      </View>
 
-      {challenges.length === 0 ? (
-        <Text>Nenhum desafio informado</Text>
-      ) : (
-        challenges.map((item, index) => <Text key={index}>• {item}</Text>)
-      )}
-
-      <View>
-        <Text> Soluções</Text>
-
-        {solutions.length === 0 ? (
-          <Text>Nenhuma solução informada</Text>
-        ) : (
-          solutions.map((item, index) => <Text key={index}>• {item}</Text>)
-        )}
+      <View style={[{ flex: 1 }]}>
+        <Text style={styles.title}>Soluções</Text>
+        {solutions.map((item, i) => (
+          <Text key={i} style={[{ fontSize: 10, marginBottom: 4 }]}>
+            • {item}
+          </Text>
+        ))}
       </View>
     </View>
   );

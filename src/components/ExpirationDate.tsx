@@ -51,8 +51,10 @@ const ExpirationsDate = ({ value, onChange }: Props) => {
     const targetDate = formatLocalDate(addDaysToDate(days));
     const isActive = value === targetDate;
 
-    return `px-5 py-2 rounded-2xl text-sm font-medium transition-colors ${
-      isActive ? 'bg-emerald-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+    return `font-inter w-[74px] h-[32px] px-[14px] py-[8px] rounded-[10px] text-[13px] font-medium transition-colors opacity-100 rotate-0 ${
+      isActive
+        ? 'bg-[#26A86E] text-white font-inter min-w-[74px] h-[32px] px-[14px] rounded-[10px] text-[13px] font-medium leading-none tracking-normal transition-colors'
+        : 'bg-[#F5F5F5] text-[#5C6164] hover:bg-gray-200 font-inter min-w-[74px] h-[32px] px-[14px] rounded-[10px] text-[13px] font-medium leading-none tracking-normal transition-colors'
     }`;
   };
 
@@ -88,7 +90,9 @@ const ExpirationsDate = ({ value, onChange }: Props) => {
 
   return (
     <div className="relative flex flex-col gap-3 w-full">
-      <label className="text-sm font-medium text-gray-700">Validade da proposta:</label>
+      <label className="font-inter font-medium text-size-[13px]  leading-none tracking-normal text-[#5C6164]">
+        Validade da proposta:
+      </label>
 
       <div className="flex flex-wrap gap-2">
         <button
@@ -117,7 +121,7 @@ const ExpirationsDate = ({ value, onChange }: Props) => {
         <button
           type="button"
           onClick={openModal}
-          className="w-full h-10 px-3 rounded-md border border-emerald-300 text-left bg-white text-gray-700 focus:outline-none focus:ring-1 focus:ring-emerald-500 items-center justify-between flex"
+          className="w-full md:max-lg:w-[318px] lg:w-[352px] h-[48px] px-[16px] rounded-[12px] border border-[#E5E5E5] bg-[#FAFAFA] text-left text-[#2A2D2E] flex items-center justify-between focus:outline-none focus:ring-1 focus:ring-emerald-500"
         >
           {selectedDate ? selectedDate.toLocaleDateString('pt-BR') : 'Selecionar data'}
           <CalendarIcon size={15} />

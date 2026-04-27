@@ -10,6 +10,7 @@ import ProposalPDF from '../pdf/ProposalPDF';
 import type { ProposalPayload } from '../types/Payload';
 import type { Company } from '../types/Company';
 import type { Proposal } from '../types/Proposal';
+import { useState } from 'react';
 
 type Props = {
   options: OptionalMonthly;
@@ -46,51 +47,86 @@ const FormPrice = ({
     implementation,
   };
   console.log(payload);
+
+  const [pdfData, setPdfData] = useState<ProposalPayload | null>(null);
+  const [pdfPrice, setPdfPrice] = useState<typeof price | null>(null);
+  const [pdfKey, setPdfKey] = useState(0);
+  const handlePreparePDF = () => {
+    setPdfData(payload);
+    setPdfPrice(price);
+    setPdfKey((prev) => prev + 1);
+  };
+
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex items-center gap-3 mb-2">
-        <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-sm">
-          3
+    <div className="flex w-full flex-col gap-[14px]">
+      <div className="w-full md:max-lg:w-[704px] md:max-lg:min-h-[394px] lg:w-[380px] lg:min-h-[527px] bg-white rounded-[16px] p-[24px] opacity-100 rotate-0">
+        <div className="mb-6 flex items-center gap-3">
+          <div className="w-[28px] h-[28px] bg-[#26A86E] rounded-[14px] flex items-center justify-center">
+            <span className="font-inter text-[14px] font-bold leading-none tracking-normal text-white">
+              3
+            </span>
+          </div>
+
+          <h1 className="font-inter text-[17px] font-semibold leading-none text-[#2A2D2E]">
+            Custos
+          </h1>
         </div>
 
-        <h1 className="text-[20px] font-semibold text-gray-800">Custo</h1>
+        <div className="grid grid-cols-1 md:max-lg:grid-cols-[1fr_1px_1fr] lg:grid-cols-1 gap-6">
+          <div>
+            <OptionsMonthly
+              value={options}
+              onChange={setOptions}
+              pricing={pricing}
+              setPricing={setPricing}
+              price={price}
+            />
+          </div>
+
+          <div className="hidden md:max-lg:block w-[1px] h-full bg-[#E5E5E5]" />
+
+          <div>
+            <ImplementationCosts
+              value={implementation}
+              onChange={setImplementation}
+              pricing={pricing}
+              setPricing={setPricing}
+            />
+          </div>
+        </div>
       </div>
 
-      <div className="border-b">
-        <OptionsMonthly
-          value={options}
-          onChange={setOptions}
-          pricing={pricing}
-          setPricing={setPricing}
-          price={price}
-        />
-      </div>
-
-      <div>
-        <ImplementationCosts
-          value={implementation}
-          onChange={setImplementation}
-          pricing={pricing}
-          setPricing={setPricing}
-        />
-      </div>
-
-      <div>
+      <div className="fixed bottom-0 left-0 z-40 w-screen min-h-[142px] bg-gradient-to-br from-[#26A86E] to-[#1F8A5A] pt-[14px] pr-[24px] pb-[20px] pl-[24px] opacity-100 rotate-0 md:max-lg:h-[100px] md:max-lg:min-h-[100px] md:max-lg:py-[16px] lg:static lg:w-[380px] lg:min-h-[169px] lg:rounded-[16px] lg:p-[24px]">
         <Costs
           price={price}
           action={
-            <PDFDownloadLink
-              document={<ProposalPDF data={payload} price={price} />}
-              fileName="proposta.pdf"
-            >
-              {({ loading }) => (
-                <button className="w-full mt-3 bg-white text-green-600 py-2 rounded font-bold focus:ring-2 hover:bg-[#ECECEC] transition cursor-pointer">
-                  {loading ? 'Gerando...' : 'Gerar Proposta'}
-                </button>
-              )}
-            </PDFDownloadLink>
+            !pdfData || !pdfPrice ? (
+              <button
+                type="button"
+                onClick={handlePreparePDF}
+                className="h-[46px] w-full rounded-[12px] bg-white font-inter text-[15px] font-semibold leading-none tracking-normal text-[#26A86E] transition hover:bg-[#ECECEC] focus:ring-2 cursor-pointer md:max-lg:h-[56px] md:max-lg:w-[240px] lg:h-[56px] lg:w-full"
+              >
+                Gerar Proposta
+              </button>
+            ) : (
+              <PDFDownloadLink
+                key={pdfKey}
+                document={<ProposalPDF data={pdfData} price={pdfPrice} />}
+                fileName="proposta.pdf"
+                className="w-full md:max-lg:w-[240px] lg:w-full"
+              >
+                {({ loading }) => (
+                  <button
+                    type="button"
+                    className="h-[46px] w-full rounded-[12px] bg-white font-inter text-[15px] font-semibold leading-none tracking-normal text-[#26A86E] transition hover:bg-[#ECECEC] focus:ring-2 cursor-pointer md:max-lg:h-[56px] lg:h-[56px]"
+                  >
+                    {loading ? 'Gerando...' : 'Baixar Proposta'}
+                  </button>
+                )}
+              </PDFDownloadLink>
+            )
           }
-        ></Costs>
+        />
       </div>
     </div>
   );

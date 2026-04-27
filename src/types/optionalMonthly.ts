@@ -9,4 +9,5 @@ export type OptionalMonthly = {
   comprovacoes: number;
   total: number;
   basePlanOverride?: number;
+  erpName?: string;
 };

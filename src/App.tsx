@@ -3,6 +3,7 @@ import FormChallengesSolutions from './forms/FormChallengesSolutions';
 import FormCompany from './forms/FormCompany';
 import FormPrice from './forms/FormPrice';
 import Header from './forms/Header';
+import { DEFAULT_CHALLENGES, DEFAULT_SOLUTIONS } from './utils/DefaultChallengesSolutions';
 
 import type { OptionalMonthly } from './types/optionalMonthly';
 import type { ImplementationCost } from './types/ImplementationCost';
@@ -18,15 +19,17 @@ function App() {
     occurrencesModule: false,
     antifraudeModule: false,
     total: 1,
+    erpName: 'XXXXXX',
   });
 
   const [implementation, setImplementation] = useState<ImplementationCost>({
     tutorialTraining: false,
     consultantTraining: false,
     custom: false,
-    customDescription: '',
+    customDescription: 'XXXXXX',
     none: false,
   });
+
   const [company, setCompany] = useState({
     name: '',
     cnpj: '',
@@ -35,8 +38,8 @@ function App() {
 
   const [proposal, setProposal] = useState({
     expirationDays: null as string | null,
-    challenges: [] as string[],
-    solutions: [] as string[],
+    challenges: [...DEFAULT_CHALLENGES],
+    solutions: [...DEFAULT_SOLUTIONS],
   });
 
   const [pricing, setPricing] = useState<PricingType>({
@@ -60,15 +63,15 @@ function App() {
   });
 
   return (
-    <div className="min-h-screen w-full flex flex-col bg-[#eeeeee]">
+    <div className="min-h-screen w-full bg-[#eeeeee]">
       <Header />
 
-      <div className="pt-25 pb-5 ">
-        <div className="max-w-800 mx-auto px-12">
+      <main className="w-full md:max-lg:w-[768px] md:max-lg:min-h-[1458px] mx-auto px-4 md:max-lg:px-[32px] lg:w-full lg:max-w-[1280px] lg:px-12 pt-24 pb-[170px] md:max-lg:pb-[130px] lg:pb-10">
+        <div className="w-full max-w-[1280px] mx-auto">
           <h1 className="text-[24px] font-semibold mb-6">Nova Proposta</h1>
 
-          <div className="grid grid-cols-12 gap-6">
-            <div className="col-span-8 flex flex-col gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div className="lg:col-span-8 flex flex-col gap-6">
               <FormCompany
                 company={company}
                 setCompany={setCompany}
@@ -76,13 +79,13 @@ function App() {
                 setProposal={setProposal}
               />
 
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div className="w-full lg:w-[780px] min-h-[471px] bg-white rounded-[16px] p-4 sm:p-6 lg:p-8 shadow-sm border border-gray-100">
                 <FormChallengesSolutions proposal={proposal} setProposal={setProposal} />
               </div>
             </div>
 
-            <div className="col-span-4">
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 sticky top-24">
+            <div className="lg:col-span-4">
+              <div className="lg:sticky lg:top-24">
                 <FormPrice
                   options={options}
                   setOptions={setOptions}
@@ -97,7 +100,7 @@ function App() {
             </div>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

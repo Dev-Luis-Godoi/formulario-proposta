@@ -11,23 +11,27 @@ type Props = {
 
 const Costs = ({ price, action }: Props) => {
   return (
-    <div className="w-full rounded-[24px] p-8 bg-gradient-to-b from-[#2FA36B] to-[#248C5C]">
-      <div className="flex flex-col gap-4">
-        <div className="flex justify-between items-center">
-          <span className="text-white text-lg font-medium">Custo Mensal</span>
+    <div className="flex w-full flex-col gap-[24px] md:max-lg:h-full md:max-lg:flex-row md:max-lg:items-center md:max-lg:justify-between md:max-lg:gap-[20px] lg:flex-col lg:items-stretch lg:justify-start lg:gap-[20px]">
+      <div className="flex w-full items-start justify-between md:max-lg:w-[360px] lg:w-full">
+        <div className="flex flex-col gap-[8px]">
+          <span className="font-inter text-[16px] font-normal leading-none tracking-normal text-white lg:text-[13px]">
+            Custo Mensal
+          </span>
 
-          <span className="text-white text-3xl font-bold">
+          <span className="font-inter text-[13px] font-normal leading-none tracking-normal text-white/70">
+            Implantação
+          </span>
+        </div>
+
+        <div className="flex flex-col items-end gap-[8px]">
+          <span className="font-inter text-[24px] font-bold leading-none tracking-normal text-white">
             {price.monthly.toLocaleString('pt-BR', {
               style: 'currency',
               currency: 'BRL',
             })}
           </span>
-        </div>
 
-        <div className="flex justify-between items-center">
-          <span className="text-white/80 text-lg">Implantação</span>
-
-          <span className="text-white/80 text-2xl font-semibold">
+          <span className="font-inter text-[16px] font-bold leading-none tracking-normal text-white/90">
             {price.implementation.toLocaleString('pt-BR', {
               style: 'currency',
               currency: 'BRL',
@@ -36,7 +40,7 @@ const Costs = ({ price, action }: Props) => {
         </div>
       </div>
 
-      <div className="mt-4">{action}</div>
+      <div className="w-full md:max-lg:w-auto lg:w-full">{action}</div>
     </div>
   );
 };

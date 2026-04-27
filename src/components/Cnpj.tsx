@@ -19,7 +19,10 @@ const CNPJInput = ({ value, onChange }: Props) => {
 
   return (
     <div className="flex flex-col gap-1">
-      <label htmlFor="cnpj" className="text-sm text-gray-600">
+      <label
+        htmlFor="cnpj"
+        className="font-inter font-medium text-size-[13px] leading-none tracking-normal text-[#5C6164] pb-1"
+      >
         CNPJ:
       </label>
 
@@ -29,7 +32,7 @@ const CNPJInput = ({ value, onChange }: Props) => {
         placeholder="00.000.000/0000-00"
         value={value}
         onChange={handleChange}
-        className="w-full h-10 px-3 py-2 rounded-md border border-gray-300 outline-none focus:ring-2 focus:ring-green-500"
+        className="bg-[#FAFAFA] text-[#A3A3A3] w-full md:max-lg:w-[318px] lg:w-[352px] h-[48px] px-[16px] rounded-[12px] border border-[#E5E5E5] opacity-100 rotate-0 outline-none focus:ring-2 focus:ring-green-500"
       />
     </div>
   );

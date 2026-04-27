@@ -1,9 +1,8 @@
 import React from 'react';
-import type { Solution } from '../types/Solution';
-import { Check, Trash2, XIcon } from 'lucide-react';
+import { Check, Trash, XIcon } from 'lucide-react';
 
 type Props = {
-  values: Solution['description'];
+  values: string[];
   onChange: (values: string[]) => void;
 };
 
@@ -41,71 +40,84 @@ const Solutions = ({ values, onChange }: Props) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <label className="text-[#26A86E] font-semibold">Soluções:</label>
+      <label className="font-inter text-[13px] font-semibold leading-none tracking-normal text-[#26A86E]">
+        Soluções:
+      </label>
 
       <div className="flex flex-col gap-4">
         {values.map((item, index) => (
-          <div key={index} className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 flex items-center justify-center rounded-full bg-emerald-100 text-emerald-500">
-                <Check size={16} />
+          <div key={`${item}-${index}`} className="flex items-center justify-between gap-4">
+            <div className="flex min-w-0 items-center gap-3">
+              <div className="flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-[11px] bg-[#E8F6EF] text-[#26A86E]">
+                <Check size={11} />
               </div>
 
-              <span className="text-gray-700">{item}</span>
+              <span className="font-inter text-[13px] font-medium leading-none tracking-normal text-[#5C6164]">
+                {item}
+              </span>
             </div>
 
             <button
               type="button"
               onClick={() => handleRemove(index)}
-              className="text-gray-400 hover:text-esmerald-500 transition"
+              className="shrink-0 text-gray-400 transition hover:text-[#26A86E]"
+              aria-label={`Remover solução ${item}`}
             >
-              <Trash2 size={18} />
+              <Trash size={14} />
             </button>
           </div>
         ))}
       </div>
 
-      <button type="button" onClick={() => setIsOpen(true)} className="w-fit  py-2 text-[#26A86E] ">
+      <button
+        type="button"
+        onClick={() => setIsOpen(true)}
+        className="w-fit font-inter text-[13px] font-medium leading-none tracking-normal text-[#26A86E]"
+      >
         + Adicionar solução
       </button>
 
       {isOpen && (
         <div
-          className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4"
           onClick={() => setIsOpen(false)}
         >
           <div
-            className="relative bg-white rounded-xl p-6 w-[400px] flex flex-col gap-4 shadow-lg"
+            className="relative flex w-full max-w-[400px] flex-col gap-4 rounded-xl bg-white p-6 shadow-lg"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               type="button"
               onClick={() => setIsOpen(false)}
-              className="absolute py-2 top-5 right-7 text-gray-400 hover:text-gray-700 text-xl"
+              className="absolute right-5 top-5 text-gray-400 hover:text-gray-700"
+              aria-label="Fechar modal"
             >
               <XIcon size={20} />
             </button>
-            <h2 className="text-lg font-semibold">Adicionar solução</h2>
-            <h3 className="text-[#5C6164]">Descrição</h3>
+
+            <h2 className="font-inter text-lg font-semibold text-[#26A86E]">Adicionar solução</h2>
+
+            <h3 className="font-inter text-[13px] font-medium leading-none tracking-normal text-[#5C6164]">
+              Descrição
+            </h3>
+
             <input
               type="text"
               placeholder="Descreva a solução..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="px-3 py-6 rounded-lg border border-[#E5E5E5] outline-none focus:ring-2 focus:ring-[#26A86E]"
+              className="h-[48px] w-full rounded-[12px] border border-[#E5E5E5] px-[16px] font-inter text-[13px] font-medium outline-none focus:ring-2 focus:ring-[#26A86E]"
               autoFocus
             />
 
-            <div className="flex justify-end gap-2">
-              <button
-                type="button"
-                onClick={handleAdd}
-                className="px-4 py-2 bg-[#26A86E] text-white rounded-full w-full"
-              >
-                Adicionar
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={handleAdd}
+              className="h-[40px] w-full rounded-[10px] bg-[#26A86E] px-[14px] font-inter text-[13px] font-medium leading-none tracking-normal text-white"
+            >
+              Adicionar
+            </button>
           </div>
         </div>
       )}

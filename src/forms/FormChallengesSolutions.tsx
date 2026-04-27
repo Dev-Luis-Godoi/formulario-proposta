@@ -10,17 +10,21 @@ type Props = {
 
 const FormChallengesSolutions = ({ proposal, setProposal }: Props) => {
   return (
-    <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div className="md:col-span-2">
+    <form className="grid grid-cols-1 md:grid-cols-[1fr_1px_1fr] gap-6">
+      <div className="md:col-span-3">
         <FormSectionHeader step={2} title="Desafios e Soluções" />
       </div>
-      <div className='"md:pr-6"'>
+
+      <div>
         <Challenges
           values={proposal.challenges}
           onChange={(challenges) => setProposal((prev) => ({ ...prev, challenges }))}
         />
       </div>
-      <div className=" md:pl-6">
+
+      <div className="hidden md:block w-[1px] min-h-[407px] bg-[#E5E5E5] opacity-100 rotate-0" />
+
+      <div>
         <Solutions
           values={proposal.solutions}
           onChange={(solutions) => setProposal((prev) => ({ ...prev, solutions }))}
