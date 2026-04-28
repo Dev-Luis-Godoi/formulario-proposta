@@ -57,6 +57,16 @@ const FormPrice = ({
     setPdfKey((prev) => prev + 1);
   };
 
+  const formatFileName = (name: string) => {
+    return name
+      .toLowerCase()
+      .trim()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, '_')
+      .replace(/^_+|_+$/g, '');
+  };
+
   return (
     <div className="flex w-full flex-col gap-[14px]">
       <div className="w-full md:max-lg:w-[704px] md:max-lg:min-h-[394px] lg:w-[380px] lg:min-h-[527px] bg-white rounded-[16px] p-[24px] opacity-100 rotate-0">
@@ -111,8 +121,8 @@ const FormPrice = ({
             ) : (
               <PDFDownloadLink
                 key={pdfKey}
-                document={<ProposalPDF data={pdfData} price={pdfPrice} />}
-                fileName="proposta.pdf"
+                document={<ProposalPDF data={pdfData} price={pdfPrice} pricing={pricing} />}
+                fileName={`proposta_${formatFileName(pdfData.company.name || 'transporte+')}.pdf`}
                 className="w-full md:max-lg:w-[240px] lg:w-full"
               >
                 {({ loading }) => (

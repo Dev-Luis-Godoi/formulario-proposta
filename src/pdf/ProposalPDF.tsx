@@ -1,33 +1,48 @@
-import { Document, Page, View } from '@react-pdf/renderer';
-import Header from './components/HeaderPDF';
+import { Document } from '@react-pdf/renderer';
+import './fonts';
+
+import HeaderPDF from './components/HeaderPDF';
 import ChallengesSolutions from './components/ChallengesSolutionsPDF';
 import Pricing from './components/PricingPDF';
 import type { ProposalPayload } from '../types/Payload';
 import type { Price } from '../types/Price';
-import { styles } from './styles';
+import FreeItems from './components/FreeItemsPDF';
+import type { PricingType } from '../types/Pricing';
+import TechnicalRequire from './components/TechnicalRequiresPDF';
+import DeliveryManagement from './components/funcionalities/DeliveryManagement';
+import Dashboard from './components/funcionalities/Dashboard';
+import ProofFlow from './components/funcionalities/ProofFlow';
+import OccurenceModule from './components/funcionalities/OccurenceModule';
+import DelieverProof from './components/funcionalities/DeliverProof';
+import Support from './components/SupportPDF';
+import NextSteps from './components/NextStepsPDF';
+import Consultant from './components/ConsultantPDF';
 
 type Props = {
   data: ProposalPayload;
   price: Price;
+  pricing: PricingType;
 };
 
-const ProposalPDF = ({ data, price }: Props) => {
+const ProposalPDF = ({ data, price, pricing }: Props) => {
   return (
     <Document>
-      <Header company={data.company} expirationDays={data.proposal.expirationDays} />
-
-      <Page size="A4" style={styles.page}>
-        <View style={styles.section}>
-          <ChallengesSolutions
-            challenges={data.proposal.challenges}
-            solutions={data.proposal.solutions}
-          />
-        </View>
-
-        <View style={styles.section}>
-          <Pricing price={price} />
-        </View>
-      </Page>
+      <HeaderPDF company={data.company} expirationDays={data.proposal.expirationDays} />
+      <ChallengesSolutions
+        challenges={data.proposal.challenges}
+        solutions={data.proposal.solutions}
+      />
+      <FreeItems />
+      <Pricing data={data} price={price} pricing={pricing} />
+      <TechnicalRequire />
+      <DeliveryManagement />
+      <Dashboard />
+      <ProofFlow />
+      <OccurenceModule />
+      <DelieverProof />
+      <Support />
+      <NextSteps />
+      <Consultant />
     </Document>
   );
 };

@@ -1,6 +1,9 @@
 import { Page, View, Text, Image, StyleSheet } from '@react-pdf/renderer';
-import background from '../../assets/fundo-header.png';
 
+import background from '../../assets/fundo-header.png';
+import macbookComTela from '../../assets/macbook-logo-completo.png';
+import logo from '../../assets/logo-dark.png';
+import handshake from '../../assets/handshake.png';
 type Props = {
   company: {
     name: string;
@@ -15,114 +18,165 @@ const styles = StyleSheet.create({
     position: 'relative',
     fontFamily: 'Helvetica',
     backgroundColor: '#07384A',
+    width: 1920,
+    height: 1080,
+  },
+  handshake: {
+    width: 40,
+    height: 40,
+    marginRight: 16,
   },
 
   background: {
     position: 'absolute',
-    width: '100%',
-    height: '100%',
+    width: 1920,
+    height: 1080,
     top: 0,
     left: 0,
   },
 
-  leftContent: {
+  headerTitleBox: {
     position: 'absolute',
-    left: 58,
-    top: 85,
-    width: 360,
+    left: 111,
+    top: 178,
+    width: 600,
   },
 
-  brand: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 18,
+  logo: {
+    width: 187.47,
+    height: 32,
+    marginTop: 4.88,
   },
 
   proposalTitle: {
+    fontFamily: 'Helvetica',
     color: '#FFFFFF',
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 88,
+    fontSize: 40,
+    fontWeight: 700,
+    lineHeight: 1.2,
+  },
+
+  leadBox: {
+    position: 'absolute',
+    left: 111,
+    top: 411,
+    width: 803,
+    height: 132,
   },
 
   cnpj: {
+    fontFamily: 'Helvetica',
     color: '#FFFFFF',
-    fontSize: 12,
-    fontWeight: 'bold',
-    marginBottom: 10,
+    fontSize: 20,
+    fontWeight: 600,
+    lineHeight: 1.3,
+    marginBottom: 7,
+    gap: 4,
   },
 
   companyName: {
-    color: '#36C180',
-    fontSize: 30,
-    fontWeight: 'bold',
-    marginBottom: 8,
+    fontFamily: 'Helvetica',
+    color: '#51B98B',
+    fontSize: 60,
+    fontWeight: 700,
+    lineHeight: 1.2,
+    marginBottom: 12,
     textTransform: 'uppercase',
+    gap: 4,
   },
 
   requester: {
+    fontFamily: 'Helvetica',
     color: '#FFFFFF',
-    fontSize: 11,
-    fontWeight: 'bold',
+    fontSize: 20,
+    fontWeight: 700,
+    lineHeight: 1.2,
+    gap: 4,
   },
 
   validityBox: {
     position: 'absolute',
-    left: 58,
-    bottom: 60,
-    width: 430,
+    left: 111,
+    top: 767,
+    width: 762,
+    height: 131,
   },
 
   validityTitle: {
+    fontFamily: 'Helvetica',
     color: '#FFFFFF',
-    fontSize: 14,
-    fontWeight: 'bold',
-    marginBottom: 12,
+    fontSize: 24,
+    fontWeight: 600,
+    lineHeight: 1.3,
+    marginBottom: 20,
   },
 
   validityText: {
+    fontFamily: 'Helvetica',
     color: '#FFFFFF',
-    fontSize: 8.8,
-    lineHeight: 1.45,
+    fontSize: 16,
+    fontWeight: 500,
+    lineHeight: 1.5,
+    marginBottom: 8,
   },
 
   macbook: {
     position: 'absolute',
-    right: -235,
-    top: 65,
-    width: 680,
+    left: 941,
+    top: 128,
+    width: 1000,
+    height: 824,
+  },
+  proposalTitleRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
 
-const Header = ({ company, expirationDays }: Props) => {
+const HeaderPDF = ({ company, expirationDays }: Props) => {
   return (
-    <Page size="A4" orientation="landscape" style={styles.page}>
-      <Image src={background} style={styles.background} />
-      <View style={styles.leftContent}>
-        <Text style={styles.brand}>Transporte+</Text>
-        <Text style={styles.proposalTitle}>PROPOSTA COMERCIAL</Text>
+    <Page size={[1920, 1080]} style={styles.page}>
+      <Image src={background} style={styles.background} fixed />
 
-        <Text style={styles.cnpj}>{company.cnpj || '00.000.000/0000-00'}</Text>
-        <Text style={styles.companyName}>{company.name || 'NOME DA EMPRESA'}</Text>
-        <Text style={styles.requester}>Solicitante: {company.requester || 'Fulano de tal'}</Text>
+      <View style={styles.headerTitleBox}>
+        <Image src={logo} style={styles.logo} />
+
+        <View style={styles.proposalTitleRow}>
+          <Image src={handshake} style={styles.handshake} />
+
+          <Text style={styles.proposalTitle}>PROPOSTA COMERCIAL</Text>
+        </View>
+      </View>
+
+      <View style={styles.leadBox}>
+        <Text style={styles.cnpj}>{company?.cnpj || '00.000.000/0000-00'}</Text>
+
+        <Text style={styles.companyName}>{company?.name || 'NOME DA EMPRESA'}</Text>
+
+        <Text style={styles.requester}>
+          Solicitante: {company?.requester || 'Nome solicitante'}
+        </Text>
       </View>
 
       <View style={styles.validityBox}>
         <Text style={styles.validityTitle}>Validade da proposta</Text>
+
         <Text style={styles.validityText}>
           A proposta é válida até o dia {expirationDays || '00/00/0000'}. Não garantimos os valores
           e condições após vencimento.
         </Text>
+
         <Text style={styles.validityText}>
           Este documento não tem validade de registro e é apenas uma forma objetiva e prática de
-          apresentar a proposta.
+          apresentar a proposta. A aceitação da proposta é um aceite inicial para seguimento e
+          preenchimento de contrato.
         </Text>
       </View>
 
-      {/* <Image src={macbookComTela} style={styles.macbook} /> */}
+      <Image src={macbookComTela} style={styles.macbook} />
     </Page>
   );
 };
 
-export default Header;
+export default HeaderPDF;
