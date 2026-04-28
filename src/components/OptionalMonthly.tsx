@@ -235,7 +235,7 @@ const OptionsMonthly = ({ value, onChange, pricing, setPricing, price }: Props) 
 
       <ul className="flex w-full flex-col gap-[10px] pt-[8px] pb-[12px] text-sm">
         <li className="flex min-h-[32px] w-full items-center justify-between gap-[8px]">
-          <p className="min-w-0 flex-1 font-inter text-[13px] font-normal leading-none tracking-normal text-[#2A2D2E]">
+          <p className="min-w-0 flex-1 font-inter text-[13px] font-[400] leading-none tracking-normal text-[#2A2D2E]">
             Plano básico (
             <button
               type="button"
@@ -285,7 +285,7 @@ const OptionsMonthly = ({ value, onChange, pricing, setPricing, price }: Props) 
                   />
                 </div>
 
-                <span className="min-w-0 flex-1 font-inter text-[13px] font-normal leading-none tracking-normal text-[#5C6164]">
+                <span className="min-w-0 flex-1 font-inter text-[13px] font-normal leading-none tracking-normal text-[#2A2D2E]">
                   {option.label}
 
                   {option.key === 'erpIntegrationAccess' && (

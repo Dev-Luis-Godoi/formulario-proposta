@@ -217,7 +217,7 @@ const ImplementationCosts = ({ value, onChange, pricing, setPricing }: Props) =>
                   />
                 </div>
 
-                <span className="min-w-0 flex-1 font-inter text-[13px] font-normal leading-none tracking-normal text-[#5C6164]">
+                <span className="min-w-0 flex-1 font-inter text-[13px] font-normal leading-none tracking-normal text-[#2A2D2E]">
                   {option.label}
 
                   {option.key === 'custom' && (

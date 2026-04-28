@@ -140,25 +140,33 @@ const ExpirationsDate = ({ value, onChange }: Props) => {
             <button
               type="button"
               onClick={() => setIsOpen(false)}
-              className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100"
+              className="absolute pt-[16px] right-5 w-8 h-8 flex items-center justify-center "
             >
               <X size={18} />
             </button>
 
-            <div className="flex justify-center mb-4">
-              <div className="flex items-center gap-4">
-                <button type="button" onClick={() => changeMonth(-1)} className="text-xl">
+            <div className="mb-6 flex justify-start">
+              <div className="flex h-[35px] w-[163px] items-center justify-between pt-[16px] pr-[20px] pl-[20px]">
+                <button
+                  type="button"
+                  onClick={() => changeMonth(-1)}
+                  className="flex items-center justify-center text-[#5C6164] hover:text-[#2A2D2E]"
+                >
                   ‹
                 </button>
 
-                <span className="font-semibold capitalize min-w-[140px] text-center">
+                <span className="font-inter text-[16px] font-semibold leading-none tracking-normal">
                   {currentDate.toLocaleDateString('pt-BR', {
                     month: 'long',
                     year: 'numeric',
                   })}
                 </span>
 
-                <button type="button" onClick={() => changeMonth(1)} className="text-xl">
+                <button
+                  type="button"
+                  onClick={() => changeMonth(1)}
+                  className="flex items-center justify-center text-[#5C6164] hover:text-[#2A2D2E]"
+                >
                   ›
                 </button>
               </div>

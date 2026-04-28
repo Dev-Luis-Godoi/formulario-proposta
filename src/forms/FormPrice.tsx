@@ -11,6 +11,7 @@ import type { ProposalPayload } from '../types/Payload';
 import type { Company } from '../types/Company';
 import type { Proposal } from '../types/Proposal';
 import { useState } from 'react';
+import { Loader2 } from 'lucide-react';
 
 type Props = {
   options: OptionalMonthly;
@@ -77,9 +78,7 @@ const FormPrice = ({
             </span>
           </div>
 
-          <h1 className="font-inter text-[17px] font-semibold leading-none text-[#2A2D2E]">
-            Custos
-          </h1>
+          <h1 className="font-inter text-[16px] font-[600] leading-none text-[#2A2D2E]">Custos</h1>
         </div>
 
         <div className="grid grid-cols-1 md:max-lg:grid-cols-[1fr_1px_1fr] lg:grid-cols-1 gap-6">
@@ -93,7 +92,7 @@ const FormPrice = ({
             />
           </div>
 
-          <div className="hidden md:max-lg:block w-[1px] h-full bg-[#E5E5E5]" />
+          <div className="hidden md:max-lg:block w-[1px] h-full bg-[#F5F5F5]" />
 
           <div>
             <ImplementationCosts
@@ -128,9 +127,13 @@ const FormPrice = ({
                 {({ loading }) => (
                   <button
                     type="button"
-                    className="h-[46px] w-full rounded-[12px] bg-white font-inter text-[15px] font-semibold leading-none tracking-normal text-[#26A86E] transition hover:bg-[#ECECEC] focus:ring-2 cursor-pointer md:max-lg:h-[56px] lg:h-[56px]"
+                    disabled={loading}
+                    className="flex h-[46px] w-full items-center justify-center rounded-[12px] bg-white font-inter text-[15px] font-semibold leading-none tracking-normal text-[#26A86E] transition hover:bg-[#ECECEC] focus:ring-2 cursor-pointer disabled:cursor-not-allowed disabled:opacity-80 md:max-lg:h-[56px] lg:h-[56px]"
                   >
-                    {loading ? 'Gerando...' : 'Baixar Proposta'}
+                    <span className="flex items-center justify-center gap-2">
+                      {loading && <Loader2 size={18} className="animate-spin" />}
+                      {loading ? 'Gerando proposta...' : 'Baixar Proposta'}
+                    </span>
                   </button>
                 )}
               </PDFDownloadLink>

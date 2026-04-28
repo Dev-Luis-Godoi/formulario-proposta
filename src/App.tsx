@@ -68,7 +68,7 @@ function App() {
 
       <main className="w-full md:max-lg:w-[768px] md:max-lg:min-h-[1458px] mx-auto px-4 md:max-lg:px-[32px] lg:w-full lg:max-w-[1280px] lg:px-12 pt-24 pb-[170px] md:max-lg:pb-[130px] lg:pb-10">
         <div className="w-full max-w-[1280px] mx-auto">
-          <h1 className="text-[24px] font-semibold mb-6">Nova Proposta</h1>
+          <h1 className="text-[24px] font-[600] mb-6 font-inter text-[#2A2D2E] ">Nova Proposta</h1>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             <div className="lg:col-span-8 flex flex-col gap-6">

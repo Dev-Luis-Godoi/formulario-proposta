@@ -39,44 +39,46 @@ const Challenges = ({ values, onChange }: Props) => {
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex h-full flex-col gap-4">
       <label className="font-inter text-[13px] font-semibold leading-none tracking-normal text-[#DC3343]">
-        Desafios:
+        Desafios
       </label>
 
-      <div className="flex flex-col gap-4">
-        {values.map((item, index) => (
-          <div key={`${item}-${index}`} className="flex items-center justify-between gap-4">
-            <div className="flex min-w-0 items-center gap-3">
-              <div className="flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-[11px] bg-[#FBE1E3] text-[#DC3343]">
-                <X size={11} />
+      <div className="flex flex-1 flex-col">
+        <div className="flex flex-col gap-4">
+          {values.map((item, index) => (
+            <div key={`${item}-${index}`} className="flex items-center justify-between gap-4">
+              <div className="flex min-w-0 items-center gap-3">
+                <div className="flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-[11px] bg-[#FBE1E3] text-[#DC3343]">
+                  <X size={11} />
+                </div>
+
+                <span className="font-inter text-[13px] font-medium leading-none tracking-normal text-[#5C6164]">
+                  {item}
+                </span>
               </div>
 
-              <span className="font-inter text-[13px] font-medium leading-none tracking-normal text-[#5C6164]">
-                {item}
-              </span>
+              <button
+                type="button"
+                onClick={() => handleRemove(index)}
+                className="shrink-0 text-gray-400 transition hover:text-[#DC3343]"
+                aria-label={`Remover desafio ${item}`}
+              >
+                <Trash size={14} />
+              </button>
             </div>
+          ))}
+        </div>
 
-            <button
-              type="button"
-              onClick={() => handleRemove(index)}
-              className="shrink-0 text-gray-400 transition hover:text-[#DC3343]"
-              aria-label={`Remover desafio ${item}`}
-            >
-              <Trash size={14} />
-            </button>
-          </div>
-        ))}
+        <button
+          type="button"
+          onClick={() => setIsOpen(true)}
+          className="mt-auto flex h-[32px] w-[315.5px] items-center gap-[6px] pt-[10px] pb-[4px] font-inter text-[13px] font-medium leading-none tracking-normal text-[#26A86E]"
+        >
+          <span>+</span>
+          <span>Adicionar desafio</span>
+        </button>
       </div>
-
-      <button
-        type="button"
-        onClick={() => setIsOpen(true)}
-        className="w-fit font-inter text-[13px] font-medium leading-none tracking-normal text-[#26A86E]"
-      >
-        + Adicionar desafio
-      </button>
-
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
           <div className="relative flex w-full max-w-[400px] flex-col gap-4 rounded-xl bg-white p-6 shadow-lg">
@@ -89,7 +91,7 @@ const Challenges = ({ values, onChange }: Props) => {
               <XIcon size={20} />
             </button>
 
-            <h2 className="font-inter text-lg font-semibold text-[#26A86E]">Adicionar desafio</h2>
+            <h2 className="font-inter text-lg font-semibold text-[#2A2D2E]">Adicionar desafio</h2>
 
             <h3 className="font-inter text-[13px] font-medium leading-none tracking-normal text-[#5C6164]">
               Descrição

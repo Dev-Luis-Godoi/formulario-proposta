@@ -39,43 +39,45 @@ const Solutions = ({ values, onChange }: Props) => {
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex h-full flex-col gap-4">
       <label className="font-inter text-[13px] font-semibold leading-none tracking-normal text-[#26A86E]">
-        Soluções:
+        Soluções
       </label>
 
-      <div className="flex flex-col gap-4">
-        {values.map((item, index) => (
-          <div key={`${item}-${index}`} className="flex items-center justify-between gap-4">
-            <div className="flex min-w-0 items-center gap-3">
-              <div className="flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-[11px] bg-[#E8F6EF] text-[#26A86E]">
-                <Check size={11} />
+      <div className="flex flex-1 flex-col">
+        <div className="flex flex-col gap-4">
+          {values.map((item, index) => (
+            <div key={`${item}-${index}`} className="flex items-center justify-between gap-4">
+              <div className="flex min-w-0 items-center gap-3">
+                <div className="flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-[11px] bg-[#E8F6EF] text-[#26A86E]">
+                  <Check size={11} />
+                </div>
+
+                <span className="font-inter text-[13px] font-medium leading-none tracking-normal text-[#5C6164]">
+                  {item}
+                </span>
               </div>
 
-              <span className="font-inter text-[13px] font-medium leading-none tracking-normal text-[#5C6164]">
-                {item}
-              </span>
+              <button
+                type="button"
+                onClick={() => handleRemove(index)}
+                className="shrink-0 text-gray-400 transition hover:text-[#26A86E]"
+                aria-label={`Remover solução ${item}`}
+              >
+                <Trash size={14} />
+              </button>
             </div>
+          ))}
+        </div>
 
-            <button
-              type="button"
-              onClick={() => handleRemove(index)}
-              className="shrink-0 text-gray-400 transition hover:text-[#26A86E]"
-              aria-label={`Remover solução ${item}`}
-            >
-              <Trash size={14} />
-            </button>
-          </div>
-        ))}
+        <button
+          type="button"
+          onClick={() => setIsOpen(true)}
+          className="mt-auto flex h-[32px] w-full max-w-[315.5px] items-center gap-[6px] pt-[10px] pb-[4px] font-inter text-[13px] font-medium leading-none tracking-normal text-[#26A86E]"
+        >
+          + Adicionar solução
+        </button>
       </div>
-
-      <button
-        type="button"
-        onClick={() => setIsOpen(true)}
-        className="w-fit font-inter text-[13px] font-medium leading-none tracking-normal text-[#26A86E]"
-      >
-        + Adicionar solução
-      </button>
 
       {isOpen && (
         <div
@@ -95,7 +97,7 @@ const Solutions = ({ values, onChange }: Props) => {
               <XIcon size={20} />
             </button>
 
-            <h2 className="font-inter text-lg font-semibold text-[#26A86E]">Adicionar solução</h2>
+            <h2 className="font-inter text-lg font-semibold text-[#2A2D2E]">Adicionar solução</h2>
 
             <h3 className="font-inter text-[13px] font-medium leading-none tracking-normal text-[#5C6164]">
               Descrição
