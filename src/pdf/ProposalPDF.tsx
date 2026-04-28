@@ -4,7 +4,7 @@ import './fonts';
 import HeaderPDF from './components/HeaderPDF';
 import ChallengesSolutions from './components/ChallengesSolutionsPDF';
 import Pricing from './components/PricingPDF';
-import type { ProposalPayload } from '../types/Payload';
+import type { ProposalPayload } from '../types/ProposalPayload';
 import type { Price } from '../types/Price';
 import FreeItems from './components/FreeItemsPDF';
 import type { PricingType } from '../types/Pricing';

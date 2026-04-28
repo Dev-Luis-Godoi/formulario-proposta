@@ -7,7 +7,7 @@ import { calculatePrice } from '../services/calculatePrice';
 import type { PricingType } from '../types/Pricing';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import ProposalPDF from '../pdf/ProposalPDF';
-import type { ProposalPayload } from '../types/Payload';
+import type { ProposalPayload } from '../types/ProposalPayload';
 import type { Company } from '../types/Company';
 import type { Proposal } from '../types/Proposal';
 import { useState } from 'react';

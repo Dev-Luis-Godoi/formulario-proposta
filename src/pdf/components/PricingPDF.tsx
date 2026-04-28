@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Page, Image } from '@react-pdf/renderer';
-import type { ProposalPayload } from '../../types/Payload';
+import type { ProposalPayload } from '../../types/ProposalPayload';
 import type { PricingType } from '../../types/Pricing';
 import logo from '../../assets/logo.png';
 type Props = {
